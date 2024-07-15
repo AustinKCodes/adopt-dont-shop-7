@@ -27,7 +27,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_141825) do
     t.string "name"
     t.string "address"
     t.string "description"
-    t.string "pet_list"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
