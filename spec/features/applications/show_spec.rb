@@ -12,19 +12,21 @@ RSpec.describe "application show page" do
     ApplicationPet.create!(application: application, pet: pet2)
 
     visit "/applications/#{application.id}"
-
+    
     expect(page).to have_content(application.name)
     expect(page).to have_content(application.address)
     expect(page).to have_content(application.description)
+    expect(page).to have_link(pet1.name)
+    expect(page).to have_link(pet2.name)
     expect(page).to have_content(application.status)
     
     click_on(pet2.name)
 
     expect(page).to have_current_path("/pets/#{pet2.id}")
-    expect(page).to have_content(pet.name)
-    expect(page).to have_content(pet.age)
-    expect(page).to have_content(pet.breed)
-    expect(page).to have_content(pet.adoptable)
+    expect(page).to have_content(pet2.name)
+    expect(page).to have_content(pet2.age)
+    expect(page).to have_content(pet2.breed)
+    expect(page).to have_content(pet2.adoptable)
 
     end
 end
