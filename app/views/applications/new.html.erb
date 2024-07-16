@@ -1,0 +1,35 @@
+<h2>New Application Form</h2>>
+<div>
+<%= form_with url: "/applications", method: :post, data: { turbo: false } do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :street_address %>
+    <%= form.text_field :street_address %>
+  </p>
+  <p>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </p>
+  <p>
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </p>
+  <p>
+    <%= form.label :zip %>
+    <%= form.text_field :zip %>
+  </p>
+  <p>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.hidden_field :status, value: "In Progress" %>
+  </p>
+  <p>
+    <%= form.submit 'Submit' %>
+  </p>
+<% end %>
+</div>
