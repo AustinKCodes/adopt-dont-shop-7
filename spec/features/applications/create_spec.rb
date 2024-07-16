@@ -30,4 +30,19 @@ RSpec.describe "create application" do
     expect(page).to have_content("In Progress")
     end
 
+  it "cannot create an application without every field filled in" do 
+    shelter = Shelter.create(name: "Aurora shelter", city: "Aurora, CO", foster_program: false, rank: 9)
+    pet = shelter.pets.create!(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true)
+    application = pet.applications.create!(name: "Debra Leen", address: "123 4th St, Nashville, TN, 56789", description: "Is this thing on?", status: "Pending")
+    ApplicationPet.create!(application: application, pet: pet)
+
+    visit "/pets"
+    click_on "Start an Application"
+    expect(page).to have_current_path("/applications/new")
+
+    click_on "Submit"
+
+    expect(page).to have_content("Make sure all fields are filled in!")
+    expect(page).to have_button("Submit")
+  end
 end

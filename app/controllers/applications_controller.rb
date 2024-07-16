@@ -9,12 +9,12 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.create(application_params)
+    application = Application.new(application_params)
     if application.save
       redirect_to "/applications/#{application.id}"
     else
-      redirect_to "/applications/new"
-      flash[:alert] = "Error"
+      flash[:alert] = "Make sure all fields are filled in!"
+      render :new
     end
   end
 
