@@ -3,7 +3,7 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     if params[:search]
-      @found_pets = Pet.where(name: params[:search])
+      @pet_search = Pet.where(name: params[:search])
     end
   end
   

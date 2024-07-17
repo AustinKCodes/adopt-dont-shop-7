@@ -11,6 +11,6 @@ shelter = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_pr
 pet1 = shelter.pets.create!(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true)
 pet2 = shelter.pets.create!(name: "Minny", age: 2, breed: "Hound", adoptable: true)
 pet3 = shelter.pets.create!(name: "Scabby", age: 2, breed: "Great Dane", adoptable: true)
-application = Application.create!(name: "Debra Leen", address: "123 4th St. Fallbrook, CA 92028", description: "I am a good person, unkay!", status: "In Progress")
 
-ApplicationPet.create!(application: application, pet: pet1)
+application1 = Application.create!(name: "Debra Leen", address: "123 4th St. Fallbrook, CA 92028", description: "I am a good person, unkay!", status: "In Progress")
+application2 = Application.create!(name: "Tilly Bum", address: "123 4th St. Fallbrook, CA 92028", description: "I am a good person, unkay!", status: "In Progress")
