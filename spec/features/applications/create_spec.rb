@@ -40,6 +40,21 @@ RSpec.describe "create application" do
     expect(page).to have_button("Submit")
   end
 
-  
-  
+  it "allows the user to submit the completed application" do
+    shelter = Shelter.create(name: "Aurora shelter", city: "Aurora, CO", foster_program: false, rank: 9)
+    pet = shelter.pets.create!(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true)
+    pet = shelter.pets.create!(name: "Mittens", age: 1, breed: "Siamese", adoptable: true)
+    application = pet.applications.create!(name: "Debra Leen", address: "123 4th St, Nashville, TN, 56789", description: "Is this thing on?", status: "Pending")
+    ApplicationPet.create!(application: application, pet: pet)
+
+    visit "/applications/#{application.id}"
+
+    fill_in "Description", with: "I love animals and have a big backyard."
+    click_button "Submit"
+
+    expect(current_path).to eq("/applications/#{application.id}")
+    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("Scooby")
+    expect(page).to have_content("Mittens")
+  end
 end
