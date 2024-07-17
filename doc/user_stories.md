@@ -123,7 +123,7 @@ And I click a button to submit this application
 Then I am taken back to the application's show page
 And I see an indicator that the application is "Pending"
 And I see all the pets that I want to adopt
-And I do not see a section to add more pets to this application
+And I do not see a section to add more pets to this application.
 ```
 
 ```
