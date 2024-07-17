@@ -1,9 +1,33 @@
 <h1> Application Information </h1>
 
-<p><%= @application.name %></p>
-<p><%= @application.address %></p>
-<p><%= @application.description %></p>
-<p><%= @application.pets.each do |pet| %>
-  <%=link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
+<p><b>Name:</b> <%= @application.name %></p>
+<p><b>Address:</b> <%= @application.address %></p>
+<p>Description: <%= @application.description %></p>
+<p>Pets: <% @application.pets.each do |pet| %>
+  <li> <%=link_to "#{pet.name}", "/pets/#{pet.id}" %></li></p>
 <% end %>
-<p><%= @application.status %></p>
+<p>Status: "<%= @application.status %>"</p>
+
+<br> </br>
+
+<section class='pet-search'>
+<h3> Add a Pet to this Application </h3>
+<p>
+<%= form_with url: "/applications/#{@application.id}", method: :get, data: { turbo: false } do |form| %>
+  <%= form.label :search %>
+  <%= form.text_field :search %>
+  <%= form.submit "Search" %>
+<% end %>
+</p>
+</section>
+
+<section class='pet-results'>
+  <% if !@found_pets.nil? && @application.status == "In Progress" %>
+    <h2>Search Results:</h2>
+    <ol>
+      <% @found_pets.each do |pet| %>
+          <li><b>Pet Name:</b> <%= pet.name %></li>
+      <% end %>
+    </ol>
+  <% end %>
+</section>
