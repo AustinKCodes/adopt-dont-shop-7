@@ -1,12 +1,14 @@
 <h1> Application Information </h1>
 
-<p><b>Name:</b> <%= @application.name %></p>
-<p><b>Address:</b> <%= @application.address %></p>
-<p>Description: <%= @application.description %></p>
-<p>Pets: <% @application.pets.each do |pet| %>
-  <li> <%=link_to "#{pet.name}", "/pets/#{pet.id}" %></li></p>
-<% end %>
-<p>Status: "<%= @application.status %>"</p>
+<section class='app-details'>
+  <p><b>Name:</b> <%= @application.name %></p>
+  <p><b>Address:</b> <%= @application.address %></p>
+  <p>Description: <%= @application.description %></p>
+  <p>Pets: <% @application.pets.each do |pet| %>
+    <li> <%=link_to "#{pet.name}", "/pets/#{pet.id}" %></li></p>
+  <% end %>
+  <p>Status: "<%= @application.status %>"</p>
+</section>
 
 <br> </br>
 
@@ -43,11 +45,11 @@
   <h2>Submit Your Application</h2>
   <p>Please add any addition details!</p>
     <%= form_with model: @application, url: "/applications/#{@application.id}", method: :patch, data: { turbo: false } do |form| %>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-    <%= form.hidden_field :status, value: "Pending" %>
-    <p>
-    <%= form.submit 'Submit' %>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+      <%= form.hidden_field :status, value: "Pending" %>
+      <p>
+      <%= form.submit 'Submit' %>
     </p>
     <%end%>
     </p>
