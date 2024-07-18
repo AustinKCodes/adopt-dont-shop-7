@@ -11,14 +11,16 @@
 <br> </br>
 
 <section class='pet-search'>
-<h3> Add a Pet to this Application </h3>
-<p>
-<%= form_with url: "/applications/#{@application.id}", method: :get, data: { turbo: false } do |form| %>
-  <%= form.label :search %>
-  <%= form.text_field :search %>
-  <%= form.submit "Search" %>
-<% end %>
-</p>
+  <% if @application.status != "Pending" %>
+    <h3> Add a Pet to this Application </h3>
+    <p>
+    <%= form_with url: "/applications/#{@application.id}", method: :get, data: { turbo: false } do |form| %>
+      <%= form.label :search %>
+      <%= form.text_field :search %>
+      <%= form.submit "Search" %>
+    <% end %>
+    </p>
+  <% end %>
 </section>
 
 <section class='pet-results'>
@@ -33,3 +35,21 @@
   <% end %>
 </section>
 
+<br></br>
+
+<section class='submit-app'>
+  <% if @application.pets != [] && @application.status != "Pending" %>
+  <p>
+  <h2>Submit Your Application</h2>
+  <p>Please add any addition details!</p>
+    <%= form_with model: @application, url: "/applications/#{@application.id}", method: :patch, data: { turbo: false } do |form| %>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+    <%= form.hidden_field :status, value: "Pending" %>
+    <p>
+    <%= form.submit 'Submit' %>
+    </p>
+    <%end%>
+    </p>
+    <%end%>
+</section>
