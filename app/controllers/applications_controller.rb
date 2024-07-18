@@ -11,6 +11,11 @@ class ApplicationsController < ApplicationController
 
   end
 
+  def update
+    @application = Application.update(description: params[:application][:description], status: params[:application][:status])
+    redirect_to "/applications/#{params[:id]}"
+  end
+
   def create
     application = Application.new(application_params)
     if application.save
