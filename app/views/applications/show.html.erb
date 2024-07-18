@@ -22,12 +22,14 @@
 </section>
 
 <section class='pet-results'>
-  <% if !@found_pets.nil? && @application.status == "In Progress" %>
+  <% if !@pet_search.nil? && @application.status == "In Progress" %>
     <h2>Search Results:</h2>
     <ol>
-      <% @found_pets.each do |pet| %>
+      <% @pet_search.each do |pet| %>
           <li><b>Pet Name:</b> <%= pet.name %></li>
+          <%= button_to 'Adopt this Pet', application_pets_path, method: :post, params: { application_id: @application.id, pet_id: pet.id } %>
       <% end %>
     </ol>
   <% end %>
 </section>
+
